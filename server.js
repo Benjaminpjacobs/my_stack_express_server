@@ -2,14 +2,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const port = 8080;
-const io = require('socket.io').listen(app.listen(port));
+const environment = process.env.NODE_ENV || 'development'
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.set('port', process.env.PORT || 8080)
 
-app.use(cors())
+const io = require('socket.io').listen(app.listen(app.get('port')));
+
+// const port = 8080;
 
 app.post('/messages', function(request, response) {
     io.sockets.emit("msg", request.body.msg);
@@ -17,7 +16,7 @@ app.post('/messages', function(request, response) {
     response.end();
 })
 
-console.log("Server Running At:localhost:" + port);
+console.log(`Server Running At:localhost: ${app.get('port')}`);
 
 io.sockets.on("connection", function(socket) {
     socket.emit("Waiting for message...");
