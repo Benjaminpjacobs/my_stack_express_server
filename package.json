@@ -4,7 +4,6 @@
     "description": "websocket server for my stack application",
     "main": "index.js",
     "scripts": {
-        "start": "server.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
