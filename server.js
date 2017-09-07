@@ -3,14 +3,21 @@ const app = express();
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const environment = process.env.NODE_ENV || 'development'
+const socketIo = require('socket.io')
+const port = process.env.PORT || 3000
 
-app.set('port', process.env.PORT || 8080)
+const server = http.createServer(app)
+    .listen(port, () => {
+        console.log('Listening on port ' + port + '.')
+    })
+
+const io = socketIo(server)
+
 app.use(cors())
 
-const io = require('socket.io').listen(app.listen(app.get('port')));
 
 app.post('/messages', function(request, response, next) {
-    // io.sockets.emit("msg", request.body.msg);
+    io.sockets.emit("msg", request.body.msg);
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end();
 })
