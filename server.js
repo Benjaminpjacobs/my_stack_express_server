@@ -8,8 +8,6 @@ app.set('port', process.env.PORT || 8080)
 
 const io = require('socket.io').listen(app.listen(app.get('port')));
 
-// const port = 8080;
-
 app.post('/messages', function(request, response) {
     io.sockets.emit("msg", request.body.msg);
     response.writeHead(200, { "Content-Type": "text/html" });
