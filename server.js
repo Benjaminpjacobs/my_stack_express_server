@@ -1,10 +1,10 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const environment = process.env.NODE_ENV || 'development'
+const http = require('http')
+const express = require('express')
 const socketIo = require('socket.io')
 const port = process.env.PORT || 3000
+const bodyParser = require('body-parser')
+
+const app = express()
 
 const server = http.createServer(app)
     .listen(port, () => {
@@ -13,8 +13,7 @@ const server = http.createServer(app)
 
 const io = socketIo(server)
 
-app.use(cors())
-
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post('/messages', function(request, response, next) {
     io.sockets.emit("msg", request.body.msg);
@@ -22,7 +21,7 @@ app.post('/messages', function(request, response, next) {
     response.end();
 })
 
-console.log(`Server Running At:localhost: ${app.get('port')}`);
+// console.log(`Server Running At:localhost: ${app.get('port')}`);
 
 io.sockets.on("connection", function(socket) {
     socket.emit("Waiting for message...");
