@@ -5,10 +5,11 @@ const cors = require('cors')
 const environment = process.env.NODE_ENV || 'development'
 
 app.set('port', process.env.PORT || 8080)
+app.use(cors())
 
 const io = require('socket.io').listen(app.listen(app.get('port')));
 
-app.post('/messages', function(request, response) {
+app.post('/messages', function(request, response, next) {
     io.sockets.emit("msg", request.body.msg);
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end();
