@@ -1,8 +1,9 @@
 const http = require('http')
 const express = require('express')
 const socketIo = require('socket.io')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 const bodyParser = require('body-parser')
+const pry = require('pryjs')
 
 const app = express()
 
@@ -16,12 +17,10 @@ const io = socketIo(server)
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post('/messages', function(request, response, next) {
-    io.sockets.emit("msg", request.body.msg);
+    io.sockets.emit("msg", request.body);
     response.writeHead(200, { "Content-Type": "text/html" });
     response.end();
 })
-
-// console.log(`Server Running At:localhost: ${app.get('port')}`);
 
 io.sockets.on("connection", function(socket) {
     socket.emit("Waiting for message...");
