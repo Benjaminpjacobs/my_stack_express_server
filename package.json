@@ -1,31 +1,37 @@
 {
-  "name": "my_stack_express_server",
-  "version": "1.0.0",
-  "description": "websocket server for my stack application",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Benjaminpjacobs/my_stack_express_server.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Benjaminpjacobs/my_stack_express_server/issues"
-  },
-  "homepage": "https://github.com/Benjaminpjacobs/my_stack_express_server#readme",
-  "dependencies": {
-    "body-parser": "^1.17.2",
-    "cors": "^2.8.4",
-    "express": "^4.15.4",
-    "jquery": "^3.2.1",
-    "pryjs": "^1.0.3",
-    "socket.io": "^2.0.3"
-  },
-  "devDependencies": {
-    "chai": "^4.1.1",
-    "mocha": "^3.5.0"
-  }
+    "name": "my_stack_express_server",
+    "version": "1.0.0",
+    "description": "websocket server for my stack application",
+    "main": "index.js",
+    "scripts": {
+        "test": "NODE_ENV=test mocha test/*-test.js",
+        "start": "nodemon server.js",
+        "debug": "NODE_ENV=test mocha debug test/*-test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/Benjaminpjacobs/my_stack_express_server.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Benjaminpjacobs/my_stack_express_server/issues"
+    },
+    "homepage": "https://github.com/Benjaminpjacobs/my_stack_express_server#readme",
+    "dependencies": {
+        "body-parser": "^1.17.2",
+        "cors": "^2.8.4",
+        "express": "^4.15.4",
+        "jquery": "^3.2.1",
+        "pryjs": "^1.0.3",
+        "socket.io": "^2.0.3"
+    },
+    "devDependencies": {
+        "chai": "^4.1.1",
+        "mocha": "^3.5.0",
+        "nodemon": "^1.11.0",
+        "pryjs": "^1.0.3",
+        "request": "^2.81.0",
+        "socket.io": "^2.0.3"
+    }
 }

@@ -3,7 +3,6 @@ const express = require('express')
 const socketIo = require('socket.io')
 const port = process.env.PORT || 8080
 const bodyParser = require('body-parser')
-const pry = require('pryjs')
 
 const app = express()
 
@@ -23,8 +22,9 @@ app.post('/messages', function(request, response, next) {
 })
 
 io.sockets.on("connection", function(socket) {
-    socket.emit("Waiting for message...");
     socket.on("Send_msg", function(data) {
         io.sockets.emit("msg", data);
     })
 })
+
+module.exports = app
